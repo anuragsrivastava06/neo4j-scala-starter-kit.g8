@@ -1,19 +1,12 @@
-name := """neo-with-scala"""
-
-version := "1.0"
-
-val scalaTest = "org.scalatest" %% "scalatest" % "2.2.6"
-val neo4j_driver = "org.neo4j.driver" % "neo4j-java-driver" % "1.0.4"
-
-lazy val commonSettings = Seq(
-  organization := "com.knoldus.neo4j",
-  version := "0.1.0",
-  scalaVersion := "2.11.7"
-)
-
+// This build is for this Giter8 template.
+// To test the template run `g8` or `g8Test` from the sbt session.
+// See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details.
 lazy val root = (project in file(".")).
-  settings(commonSettings: _*).
   settings(
-    name := "neo4j_procedure",
-    libraryDependencies ++= Seq(scalaTest, neo4j_driver)
+    name := "neo4j-scala-starter-kit",
+    test in Test := {
+      val _ = (g8Test in Test).toTask("").value
+    },
+    scriptedLaunchOpts ++= List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-XX:MaxPermSize=256m", "-Xss2m", "-Dfile.encoding=UTF-8"),
+    resolvers += Resolver.url("typesafe", url("http://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns)
   )
